@@ -3,12 +3,21 @@
     ViewData["Title"] = "JsonTest";
 }
 
-<h1>JsonTest</h1>
-<ul>
-    <li>Tom</li>
-    <li>Jack</li>
-    <li>Mary</li>
+<h1>JSON 練習</h1>
+<ul id="ul1">
+   
 </ul>
+
+<table id="table1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>年資</th>
+            <th>薪水</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
 
 
@@ -25,12 +34,50 @@
             { "name": "Jack", "workYears": 5, "salary": 40000 },
             { "name": "Mary", "workYears": 7, "salary": 45000 }];
 
-        //emps => array
-        console.log(emps[1]) //{ "name": "Jack", "workYears": 5, "salary": 40000 }
-        //emps[1] => object
-        console.log(emps[1].name)  //Jack
+        //querySelector('css selectors')
+        const theUl = document.querySelector('#ul1')
+        const empTable = document.querySelector('#table1>tbody')
+
+        // //emps => array
+        // console.log(emps[1]) //{ "name": "Jack", "workYears": 5, "salary": 40000 }
+        // //emps[1] => object
+        // console.log(emps[1].name)  //Jack
+
+        // 讀取 JSON 中的資料
+        // for (let i = 0, max = emps.length; i < max; i++) {
+        //     console.log(emps[i].name)
+        //     console.log(emps[i].workYears)
+        //     console.log(emps[i].salary)
+        // }
+
+        //for..in  for..of
+
+        //ES6 Array.method()
+        emps.forEach(emp=>{
+            // 將資料顯示在網頁上 DOM
+            const eleLi = document.createElement('li')   //<li></li>
+            const txtLi = document.createTextNode(emp.name) //Jack
+            eleLi.appendChild(txtLi)  //<li>Jack</li>
+            theUl.appendChild(eleLi) //<ul><li>Jack</li></ul>
+        })
+
+        const datas = emps.map(emp => {
+            //解構賦值
+            const { name, workYears, salary } = emp  //{"name":"Tom","workYears":10 }
+            return(
+                `
+                <tr>
+                   <td>${name}</td>
+                   <td>${workYears}</td>
+                   <td>${salary}</td>
+                </tr>                
+                `
+            )
+        })
+        empTable.innerHTML = datas.join("")
 
 
+       
 
     </script>
 }

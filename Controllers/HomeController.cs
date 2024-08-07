@@ -1,5 +1,6 @@
 using AjaxDemo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace AjaxDemo.Controllers
@@ -7,10 +8,12 @@ namespace AjaxDemo.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly mydbContext _context;
+     
+        public HomeController(ILogger<HomeController> logger, mydbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -21,6 +24,12 @@ namespace AjaxDemo.Controllers
         public IActionResult JsonTest()
         {
             return View();
+        }
+
+        public IActionResult First()
+        {
+            var categories = _context.Categories;
+            return View(categories);
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<AjaxDemo.Models.Category>
+@{
+    ViewData["Title"] = "First";
+}
+
+<h1>First</h1>
+
+<ul>
+    @foreach (var category in Model)
+    {
+        <li>@category.CategoryName</li>
+    }
+</ul>
+

@@ -16,6 +16,22 @@
 
 @section Scripts {
     <script>
+
+        //IIFE 立即執行函式
+        // (() => { })();
+
+        (async () => {
+            let data = await printSomething("A")
+                console.log(data)
+                data = await printSomething("B")
+                console.log(data)
+                data = await printSomething("C")
+                console.log(data)
+                data = await printSomething("D")
+                console.log(data)
+        })();
+
+
         // setTimeout(function () {
         //     console.log('A');
         //     setTimeout(function () {
@@ -54,18 +70,20 @@
         //     })
 
         // async await  寫非同步程式就跟同步一樣
-        async function callPromise() {
-            let data = await printSomething("A")
-            console.log(data)
-            data = await printSomething("B")
-            console.log(data)
-            data = await printSomething("C")
-            console.log(data)
-            data = await printSomething("D")
-            console.log(data)
-        }
+        // async function callPromise() {
+        //     let data = await printSomething("A")
+        //     console.log(data)
+        //     data = await printSomething("B")
+        //     console.log(data)
+        //     data = await printSomething("C")
+        //     console.log(data)
+        //     data = await printSomething("D")
+        //     console.log(data)
+        // }
 
-        callPromise()
+        // callPromise()
+
+   
         
 
 

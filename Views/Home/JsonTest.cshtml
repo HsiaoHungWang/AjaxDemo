@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "JsonTest";
+}
+
+<h1>JsonTest</h1>
+<ul>
+    <li>Tom</li>
+    <li>Jack</li>
+    <li>Mary</li>
+</ul>
+
+
+
+@section Styles {
+    <style>
+
+    </style>
+}
+
+@section Scripts {
+    <script>
+        const emps = [
+            { "name": "Tom", "workYears": 3, "salary": 35000 },
+            { "name": "Jack", "workYears": 5, "salary": 40000 },
+            { "name": "Mary", "workYears": 7, "salary": 45000 }];
+
+        //emps => array
+        console.log(emps[1]) //{ "name": "Jack", "workYears": 5, "salary": 40000 }
+        //emps[1] => object
+        console.log(emps[1].name)  //Jack
+
+
+
+    </script>
+}
+

@@ -36,23 +36,37 @@
             return promise
         }
 
-        printSomething("A")
-           .then(data => {
-               console.log(data)
-               return printSomething("B")
-           })
-           .then(data => {
-                console.log(data)
-                return printSomething("C")
-            })
-            .then(data => {
-                console.log(data)
-                return printSomething("D")
-            })
-            .then(data => {
-                console.log(data)               
-            })
+        // printSomething("A")
+        //    .then(data => {
+        //        console.log(data)
+        //        return printSomething("B")
+        //    })
+        //    .then(data => {
+        //         console.log(data)
+        //         return printSomething("C")
+        //     })
+        //     .then(data => {
+        //         console.log(data)
+        //         return printSomething("D")
+        //     })
+        //     .then(data => {
+        //         console.log(data)               
+        //     })
 
+        // async await  寫非同步程式就跟同步一樣
+        async function callPromise() {
+            let data = await printSomething("A")
+            console.log(data)
+            data = await printSomething("B")
+            console.log(data)
+            data = await printSomething("C")
+            console.log(data)
+            data = await printSomething("D")
+            console.log(data)
+        }
+
+        callPromise()
+        
 
 
         // // 建立 Promise 物件

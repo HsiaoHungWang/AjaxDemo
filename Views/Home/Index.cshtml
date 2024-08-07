@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles {
+    <style>
+        h1 {
+            color: green
+        }
+    </style>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@section Scripts {
+    <script>
+        // setTimeout(function () {
+        //     console.log('A');
+        //     setTimeout(function () {
+        //         console.log('B');
+        //         setTimeout(function () {
+        //             console.log('C');
+        //         }, 1000);
+        //     }, 1000);
+        // }, 1000);
+
+        function printSomething(data) {
+            const promise = new Promise((resolve, reject) => {
+                //非同步的程式碼
+                setTimeout(() => {
+                    resolve(data)
+                },1000)
+            })
+            return promise
+        }
+
+        printSomething("A")
+           .then(data => {
+               console.log(data)
+               return printSomething("B")
+           })
+           .then(data => {
+                console.log(data)
+                return printSomething("C")
+           })
+           .then(data => console.log(data))
+
+
+
+        // // 建立 Promise 物件
+        // const promise = new Promise((resolve, reject) => {
+        //    //非同步的程式碼
+        //     if (false) {
+        //         resolve('成功')
+        //     } else {
+        //         reject('失敗')
+        //     }
+        // })
+        // console.log(promise)
+
+        // //怎麼使用 promise
+        // promise
+        // .then(result => console.log(result))
+        // .catch(error => console.log(error))
+        // .finally(() => console.log('結束'))
+
+
+
+    </script>
+}
+

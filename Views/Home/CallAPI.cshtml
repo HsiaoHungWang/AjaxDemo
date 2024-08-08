@@ -6,6 +6,8 @@
 <h1>CallAPI</h1>
 <img src="~/uploads/cat1.jpg" alt="cat" class="w-50 img-thumbnail" /><br />
 <button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<button id="buttonStop" class="btn btn-danger">Ajax 停止</button>
+<img id="img1" src="~/images/loading.gif" alt="執行中" style="display:none" />
 <div id="div1" class="alert alert-secondary mt-3"></div>
 @section Styles {
     <style>
@@ -17,9 +19,12 @@
     <script>
         //找到要控制對象
         const btnStart = document.querySelector('#buttonStart')
+        const btnStop = document.querySelector('#buttonStop')
         const divMessage = document.querySelector('#div1')
-
-        //綁定事件(使用者行為)
+        const imgLoading = document.querySelector('#img1')
+        let abortController;
+        
+        //綁定事件(使用者行為)               
         btnStart.addEventListener('click', async () => {
             //做甚麼事 call api
             // console.log(fetch('/api/index')) //得到是一個Promise物件
@@ -40,20 +45,48 @@
             //     })
             //     .then(data => divMessage.innerHTML = `<h3>${data}</h3>`) //Ajax, 您好
 
+            //顯示執行中的圖示
+            imgLoading.style.display = 'inline'
+            btnStart.setAttribute('disabled','disabled')
+            btnStart.textContent = '執行中...'
+
+            //建立AbortController產生signal
+            abortController = new AbortController()
+            const signal = abortController.signal;
+            setTimeout(() => {
+                abortController.abort()
+            },3000)
+
+
             //改用 async await
             try {
-                const response = await fetch('@Url.Content("~/api/index1")')
+                const response = await fetch('@Url.Content("~/api/index")', { signal })
                 if (!response.ok) {
                     throw new Error(`${response.status}`)
                 }
                 const data = await response.text()
                 divMessage.innerHTML = `<h3>${data}</h3>`
-            } catch(error) {
-                divMessage.innerHTML = `<h3>${error.message}</h3>`
+            } catch (error) {
+                let message = error.message
+                if (error.name === 'AbortError') {
+                    message = '伺服器忙碌中請稍後再來'
+                }
+                divMessage.innerHTML = `<h3>${message}</h3>`
+            } finally {
+                //顯示執行中的圖示
+                imgLoading.style.display = 'none'
+                btnStart.removeAttribute('disabled')
+                btnStart.textContent = 'Ajax 開始'
             }
             
         })
 
-        
+        //停止Ajax呼叫
+        btnStop.addEventListener('click', () => {
+            if (abortController) {
+                abortController.abort()
+            }
+            
+        })
     </script>
 }

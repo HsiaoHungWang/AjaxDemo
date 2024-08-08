@@ -4,7 +4,8 @@
 }
 
 <h1>CallAPI</h1>
-
+<button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
+<div id="div1" class="alert alert-secondary mt-3"></div>
 @section Styles {
     <style>
 
@@ -13,12 +14,22 @@
 
 @section Scripts {
     <script>
-        // console.log(fetch('/api/index')) //得到是一個Promise物件
-        fetch('/api/index')
-            .then(response => {
-                console.log(response)
-                return response.text() //得到又是一個Promise物件
-            })
-            .then(data => console.log(data)) //Ajax, 您好
+        //找到要控制對象
+        const btnStart = document.querySelector('#buttonStart')
+        const divMessage = document.querySelector('#div1')
+
+        //綁定事件(使用者行為)
+        btnStart.addEventListener('click', () => {
+            //做甚麼事 call api
+            // console.log(fetch('/api/index')) //得到是一個Promise物件
+            fetch('/api/index')
+                .then(response => {
+                    console.log(response)
+                    return response.text() //得到又是一個Promise物件
+                })
+                .then(data => divMessage.innerHTML = `<h3>${data}</h3>`) //Ajax, 您好
+        })
+
+        
     </script>
 }

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "CallAPI";
+}
+
+<h1>CallAPI</h1>
+
+@section Styles {
+    <style>
+
+    </style>
+}
+
+@section Scripts {
+    <script>
+        // console.log(fetch('/api/index')) //得到是一個Promise物件
+        fetch('/api/index')
+            .then(response => {
+                console.log(response)
+                return response.text() //得到又是一個Promise物件
+            })
+            .then(data => console.log(data)) //Ajax, 您好
+    </script>
+}

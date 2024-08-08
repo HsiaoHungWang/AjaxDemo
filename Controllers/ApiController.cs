@@ -15,7 +15,7 @@ namespace AjaxDemo.Controllers
 
         public IActionResult Index()
         {
-            string content = "<h2>Ajax, 您好</h2>";
+            string content = "Ajax, 您好";
             return Content(content,"text/plain",System.Text.Encoding.UTF8);
         }
 
@@ -23,6 +23,10 @@ namespace AjaxDemo.Controllers
            var cities = _context.Addresses.Select(a=>a.City).Distinct();
            return Json(cities);
         }
+
+        //todo 根據 city 讀出鄉鎮區(site_id)的資料
+
+        //todo 根據 site_id 讀出路名(road) 
 
         public IActionResult Avatar(int id=1) {
             var member = _context.Members.Find(id);

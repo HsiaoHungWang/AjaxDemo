@@ -32,6 +32,11 @@ namespace AjaxDemo.Controllers
             return View(categories);
         }
 
+        public IActionResult CallAPI() {
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

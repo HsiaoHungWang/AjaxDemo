@@ -1,5 +1,6 @@
 ﻿using AjaxDemo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AjaxDemo.Controllers
 {
@@ -25,9 +26,13 @@ namespace AjaxDemo.Controllers
 
         public IActionResult Avatar(int id=1) {
             var member = _context.Members.Find(id);
-            byte[] img = member.FileData;
+            if (member != null)
+            {
+                byte[] img = member.FileData;
+                return File(img, "image/jpeg");
+            }
+            return NotFound();
 
-            return File(img, "image/jpeg");
         }
 
     }

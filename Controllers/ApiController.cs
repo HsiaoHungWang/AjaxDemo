@@ -23,5 +23,12 @@ namespace AjaxDemo.Controllers
            return Json(cities);
         }
 
+        public IActionResult Avatar(int id=1) {
+            var member = _context.Members.Find(id);
+            byte[] img = member.FileData;
+
+            return File(img, "image/jpeg");
+        }
+
     }
 }

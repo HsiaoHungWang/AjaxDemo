@@ -78,6 +78,22 @@
         })
         empTable.innerHTML = datas.join("")
 
+        const emp = {
+            "employees": [
+                { "name": "Tom", "workYears": 3, "salary": 35000 },
+                { "name": "Jack", "workYears": 5, "salary": 40000 },
+                { "name": "Mary", "workYears": 7, "salary": 45000 }
+            ]
+        };
+
+        const eleEmps = emp.employees.map(employee => {
+            const { salary } = employee
+            return(
+                salary + 5000 
+            )
+        })
+
+        console.log(eleEmps)
 
        
 

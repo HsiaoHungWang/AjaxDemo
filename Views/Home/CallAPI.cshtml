@@ -4,6 +4,7 @@
 }
 
 <h1>CallAPI</h1>
+<img src="~/uploads/cat1.jpg" alt="cat" class="w-50 img-thumbnail" /><br />
 <button id="buttonStart" class="btn btn-primary">Ajax 開始</button>
 <div id="div1" class="alert alert-secondary mt-3"></div>
 @section Styles {
@@ -22,7 +23,7 @@
         btnStart.addEventListener('click', () => {
             //做甚麼事 call api
             // console.log(fetch('/api/index')) //得到是一個Promise物件
-            fetch('/api/index')
+            fetch('@Url.Content("~/api/index")')
                 .then(response => {
                     console.log(response)
                     return response.text() //得到又是一個Promise物件

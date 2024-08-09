@@ -50,6 +50,10 @@ namespace AjaxDemo.Controllers
             return View();
         }
 
+        public IActionResult travel() {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

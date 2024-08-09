@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "travel";
+}
+
+<h1>travel</h1>
+
+@section Styles {
+    <style>
+
+    </style>
+}
+
+@section Scripts {
+    <script>
+        const datas = {"categoryId":0, "keyword":"abc"}
+        console.log(datas)
+        const strDatas = JSON.stringify(datas)
+        console.log(strDatas)
+        console.log(JSON.parse(strDatas))
+    </script>
+}

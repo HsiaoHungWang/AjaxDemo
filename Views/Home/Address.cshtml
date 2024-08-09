@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+<select id="selectCity">
+    <option value="1">Item1</option>
+    <option value="2">Item2</option>
+    <option value="3">Item3</option>
+</select>
+<div id="div1"></div>
+@section Styles {
+    <style>
+
+    </style>
+}
+
+@section Scripts {
+    <script>
+        const selCity = document.querySelector('#selectCity')
+        const divInfo = document.querySelector('#div1')
+        selCity.addEventListener('change', () => {
+            divInfo.textContent = selCity.value
+        })
+    </script>
+}
+

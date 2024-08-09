@@ -16,7 +16,7 @@ namespace AjaxDemo.Controllers
         public IActionResult Index()
         {
             //暫停五秒
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
 
             string content = "Ajax, 您好";
             return Content(content,"text/plain",System.Text.Encoding.UTF8);

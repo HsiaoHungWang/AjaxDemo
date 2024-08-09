@@ -1,4 +1,5 @@
 ﻿using AjaxDemo.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Drawing;
@@ -8,10 +9,11 @@ namespace AjaxDemo.Controllers
     public class ApiController : Controller
     {
         private readonly mydbContext _context;
-
-        public ApiController(mydbContext context)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ApiController(mydbContext context, IWebHostEnvironment webHostEnvironment)
         {            
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -51,10 +53,30 @@ namespace AjaxDemo.Controllers
             {
                 _user.userName = "Guest";
             }
+           
             string info = $"{_user.userPhoto.FileName}-{_user.userPhoto.Length}-{_user.userPhoto.ContentType}";
 
+
+            //實際路徑 C:\Shared\012_Ajax\workspace\AjaxDemo\wwwroot\uploads\abc.jpg
+            //string strPath = @"C:\Shared\012_Ajax\workspace\AjaxDemo\wwwroot\uploads\abc.jpg";
+            //string strPath = _webHostEnvironment.WebRootPath;
+            //C:\Shared\012_Ajax\workspace\AjaxDemo\wwwroot
+            //string strPath = _webHostEnvironment.ContentRootPath;
+            //C:\Shared\012_Ajax\workspace\AjaxDemo
+
+
+            //檔案上傳
+            string strPath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", _user.userPhoto.FileName);
+
+            using (var fileStream = new FileStream(strPath, FileMode.Create))
+            {
+                _user.userPhoto.CopyTo(fileStream);
+            }
+
             //return Content($"{_user.userName} - {_user.userEmail} - {_user.userAge}", "text/plain");
-            return Content(info,"text/plain",System.Text.Encoding.UTF8);
+            //return Content(info,"text/plain",System.Text.Encoding.UTF8);
+            return Content(strPath);
+
         }
 
     }

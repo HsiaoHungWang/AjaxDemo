@@ -5,9 +5,8 @@
 
 <h1>Address</h1>
 <select id="selectCity">
-    <option value="1">Item1</option>
-    <option value="2">Item2</option>
-    <option value="3">Item3</option>
+    <option value="1">請選擇</option>
+   
 </select>
 <div id="div1"></div>
 @section Styles {
@@ -22,7 +21,7 @@
 
       //call cities api
             (async () => {
-                const api = '@Url.Content("~/api/cities")'
+                const api ='@Url.Content("~/api/cities")'
                 const response = await fetch(api)
                 const cities = await response.json()
                 //console.log(cities)
@@ -30,6 +29,8 @@
                 //顯示資料
                 const eleCities = cities.map(city => `<option value='${city}'>${city}</option>`)
                 selCity.innerHTML = eleCities.join("")
+
+            // selCity.insertAdjacentHTML('beforeend', eleCities.join(""))
             })();
 
         const selCity = document.querySelector('#selectCity')

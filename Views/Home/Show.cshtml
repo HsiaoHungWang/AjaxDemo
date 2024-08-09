@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+}
+
+<h1>Show</h1>
+<img id="img1" />
+@section Styles {
+    <style>
+
+    </style>
+}
+
+@section Scripts {
+    <script>
+        (async() => {
+            const api = '@Url.Content("~/api/avatar")'
+            const response = await fetch(api)
+            const datas = await response.blob()
+
+            //顯示圖片
+            myImg.src = URL.createObjectURL(datas)
+        
+        })();
+
+        const myImg = document.querySelector('#img1')
+
+    </script>
+}

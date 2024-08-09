@@ -18,15 +18,21 @@
         const myImg = document.querySelector('#img1')
         const numId = document.querySelector('#numberId')
 
-        numId.addEventListener('blur', async() => {
+        numId.addEventListener('keydown', async(event) => {
             // console.log(numId.value)
-
-            const api = `@Url.Content("~/api/avatar")/${numId.value}`
-            const response = await fetch(api)
-                const datas = await response.blob()
-
-                //顯示圖片
-                myImg.src = URL.createObjectURL(datas)
+            if (event.which === 13) {
+                const api = `@Url.Content("~/api/avatar")/${numId.value}`
+                const response = await fetch(api)
+                if (response.ok) {
+                    const datas = await response.blob()
+                    //顯示圖片
+                    myImg.src = URL.createObjectURL(datas)
+                } else {
+                    alert('找不到圖')
+                }
+                  
+            }
+            
         })
 
 

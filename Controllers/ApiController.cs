@@ -1,6 +1,7 @@
 ﻿using AjaxDemo.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace AjaxDemo.Controllers
 {
@@ -46,11 +47,14 @@ namespace AjaxDemo.Controllers
         //public IActionResult Register(string userName, string userEmail, int userAge = 20) {
           public IActionResult Register(UserDTO _user)
             {
-                if (string.IsNullOrEmpty(_user.userName))
+             if (string.IsNullOrEmpty(_user.userName))
             {
                 _user.userName = "Guest";
             }
-            return Content($"{_user.userName} - {_user.userEmail} - {_user.userAge}", "text/plain");
+            string info = $"{_user.userPhoto.FileName}-{_user.userPhoto.Length}-{_user.userPhoto.ContentType}";
+
+            //return Content($"{_user.userName} - {_user.userEmail} - {_user.userAge}", "text/plain");
+            return Content(info,"text/plain",System.Text.Encoding.UTF8);
         }
 
     }

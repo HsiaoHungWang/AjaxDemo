@@ -73,6 +73,31 @@ namespace AjaxDemo.Controllers
                 _user.userPhoto.CopyTo(fileStream);
             }
 
+            //寫進資料庫
+            Member member = new Member();
+            member.Name = _user.userName;
+            member.Email = _user.userEmail;
+            member.Age = _user.userAge;
+            member.FileName = _user.userPhoto.FileName;
+
+            //將上傳的檔案轉成二進位
+            byte[] imgByte = null;
+            using(var memorySteam = new MemoryStream())
+            {
+                _user.userPhoto.CopyTo(memorySteam);
+                imgByte = memorySteam.ToArray();
+
+            }
+            member.FileData = imgByte;
+
+            _context.Members.Add(member);
+            _context.SaveChanges();
+
+
+
+
+
+
             //return Content($"{_user.userName} - {_user.userEmail} - {_user.userAge}", "text/plain");
             //return Content(info,"text/plain",System.Text.Encoding.UTF8);
             return Content(strPath);

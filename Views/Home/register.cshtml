@@ -23,6 +23,7 @@
             <div class="mb-3">
                 <label for="formFile" class="form-label">頭像</label>
                 <input class="form-control" type="file" id="formFile" name="userPhoto">
+                <img id="img1" class="mt-3 w-50 img-thumbnail" />
             </div>
             <button type="submit" id="button1" class="btn btn-primary">Click</button>
         </form>
@@ -45,6 +46,18 @@
     <script>
         const btn = document.querySelector('#button1')
         const divInfo = document.querySelector('#div1')
+        const aFile = document.querySelector('#formFile')
+        const theImg = document.querySelector('#img1')
+
+        aFile.addEventListener('change', () => {
+           const theFile = aFile.files[0]
+           // console.log(theFile.name)
+           const reader = new FileReader()
+            reader.readAsDataURL(theFile)
+            reader.addEventListener('load', () => {
+                theImg.src = reader.result
+            })
+        })
 
         // const inpName = document.querySelector('#inputName')
         // const inpEmail = document.querySelector('#inputEmail')

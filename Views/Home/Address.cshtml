@@ -18,11 +18,33 @@
 
 @section Scripts {
     <script>
+      //IIFE放到程式碼的最上面
+
+      //call cities api
+            (async () => {
+                const api = '@Url.Content("~/api/cities")'
+                const response = await fetch(api)
+                const cities = await response.json()
+                //console.log(cities)
+                //讀取 json 資料
+                //顯示資料
+                const eleCities = cities.map(city => `<option value='${city}'>${city}</option>`)
+                selCity.innerHTML = eleCities.join("")
+            })();
+
         const selCity = document.querySelector('#selectCity')
         const divInfo = document.querySelector('#div1')
+
         selCity.addEventListener('change', () => {
             divInfo.textContent = selCity.value
+            // const i = selCity.selectedIndex
+            // console.log(selCity.options[i].value)
+            // console.log(selCity.options[i].text)
         })
+
+
+           
+
     </script>
 }
 

@@ -31,6 +31,7 @@ namespace AjaxDemo.Controllers
 
         //todo 根據 site_id 讀出路名(road) 
 
+        //http://...../api/avatar/3
         public IActionResult Avatar(int id=1) {
             var member = _context.Members.Find(id);
             if (member != null)

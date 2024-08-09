@@ -19,6 +19,7 @@
         const numId = document.querySelector('#numberId')
 
         numId.addEventListener('keydown', async(event) => {
+            //console.log(event)
             // console.log(numId.value)
             if (event.which === 13) {
                 const api = `@Url.Content("~/api/avatar")/${numId.value}`

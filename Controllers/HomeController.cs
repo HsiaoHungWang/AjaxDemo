@@ -45,6 +45,10 @@ namespace AjaxDemo.Controllers
         {
             return View();
         }
+        public IActionResult register()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {

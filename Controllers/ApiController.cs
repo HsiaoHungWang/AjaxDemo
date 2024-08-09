@@ -43,5 +43,15 @@ namespace AjaxDemo.Controllers
 
         }
 
+        //public IActionResult Register(string userName, string userEmail, int userAge = 20) {
+          public IActionResult Register(UserDTO _user)
+            {
+                if (string.IsNullOrEmpty(_user.userName))
+            {
+                _user.userName = "Guest";
+            }
+            return Content($"{_user.userName} - {_user.userEmail} - {_user.userAge}", "text/plain");
+        }
+
     }
 }

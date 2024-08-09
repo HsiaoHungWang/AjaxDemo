@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "register";
+}
+
+<h1>register</h1>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="mb-3">
+            <label for="inputName" class="form-label">姓名</label>
+            <input type="text" class="form-control" id="inputName">          
+        </div>
+        <div class="mb-3">
+            <label for="inputEmail" class="form-label">電子郵件</label>
+            <input type="text" class="form-control" id="inputEmail">
+        </div>
+        <div class="mb-3">
+            <label for="inputAge" class="form-label">年紀</label>
+            <input type="text" class="form-control" id="inputAge">
+        </div>
+
+        <button id="button1" class="btn btn-primary">Click</button>
+
+        <div id="div1" class="alert alert-info mt-3"></div>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+
+
+@section Styles {
+    <style>
+
+    </style>
+}
+
+@section Scripts {
+    <script>
+        const btn = document.querySelector('#button1')
+        const divInfo = document.querySelector('#div1')
+        const inpName = document.querySelector('#inputName')
+        const inpEmail = document.querySelector('#inputEmail')
+        const inpAge = document.querySelector('#inputAge')
+
+        btn.addEventListener('click', async () => {
+            const api = `@Url.Content("~/api/register/")?userName=${inpName.value}&userEmail=${inpEmail.value}&userAge=${inpAge.value}`
+            const response = await fetch(api)
+            const data = await response.text()
+
+            divInfo.innerHTML=`<h3>${data}</h3>`
+
+        })
+    </script>
+}

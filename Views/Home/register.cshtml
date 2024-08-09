@@ -55,18 +55,25 @@
 
             //FormData
             const formData = new FormData(document.querySelector('#userForm'))
-            for(const pair of formData.entries()){
-                console.log(pair[0])
-                console.log(pair[1])
-            }
+            //讀出formData中的資料
+            // for(const pair of formData.entries()){
+            //     console.log(pair[0])
+            //     console.log(pair[1])
+            // }
 
+            const api = '@Url.Content("~/api/register/")'
+            const response = await fetch(api, {
+                method:'POST',
+                body: formData
+            })
+           
 
 
             // const api = `@Url.Content("~/api/register/")?userName=${inpName.value}&userEmail=${inpEmail.value}&userAge=${inpAge.value}`
             // const response = await fetch(api)
-            // const data = await response.text()
+            const data = await response.text()
 
-            // divInfo.innerHTML=`<h3>${data}</h3>`
+            divInfo.innerHTML=`<h3>${data}</h3>`
 
         })
     </script>

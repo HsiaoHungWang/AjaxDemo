@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Drawing;
 using AjaxDemo.Models.DTO;
+//using AspNetCore;
+
 
 namespace AjaxDemo.Controllers
 {
@@ -119,8 +121,37 @@ namespace AjaxDemo.Controllers
 
             //根據價錢搜尋
             //根據日期區間搜尋
-           
-            
+
+            //排序
+            //switch (_searchDTO.sortBy)
+            //{
+            //    case "spotTitle":
+            //        spots = _searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotTitle) : spots.OrderByDescending(s => s.SpotTitle);
+            //        break;
+            //    case "categoryId":
+            //        spots = _searchDTO.sortType == "asc" ? spots.OrderBy(s => s.CategoryId) : spots.OrderByDescending(s => s.CategoryId);
+            //        break;
+            //    default:
+            //        spots = _searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotId) : spots.OrderByDescending(s => s.SpotId);
+            //        break;
+            //}
+
+            switch (_searchDTO.sortBy)
+            {
+                case "spotTitle":
+                    spots = _searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotTitle) : spots.OrderByDescending(s => s.SpotTitle);
+                    break;
+                case "categoryId":
+                    spots = _searchDTO.sortType == "asc" ? spots.OrderBy(s => s.CategoryId) : spots.OrderByDescending(s => s.CategoryId);
+                    break;
+                default:
+                    spots = _searchDTO.sortType == "asc" ? spots.OrderBy(s => s.SpotId) : spots.OrderByDescending(s => s.SpotId);
+                    break;
+            }
+
+            //分頁
+
+
             return Json(spots);
         }
     }

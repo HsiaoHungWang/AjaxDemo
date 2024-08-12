@@ -3,6 +3,7 @@ using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Drawing;
+using AjaxDemo.Models.DTO;
 
 namespace AjaxDemo.Controllers
 {
@@ -104,5 +105,23 @@ namespace AjaxDemo.Controllers
 
         }
 
+       [HttpPost]
+        public IActionResult Spots([FromBody]SearchDTO _searchDTO)
+        {
+            //根據分類編號讀取相關景點
+            var spots = _searchDTO.categoryId == 0 ? _context.SpotImagesSpots : _context.SpotImagesSpots.Where(s=>s.CategoryId == _searchDTO.categoryId);
+
+            //關鍵字搜尋
+            if (!string.IsNullOrEmpty(_searchDTO.keyword))
+            {
+                spots = spots.Where(s => s.SpotTitle.Contains(_searchDTO.keyword) || s.SpotDescription.Contains(_searchDTO.keyword));
+            }
+
+            //根據價錢搜尋
+            //根據日期區間搜尋
+           
+            
+            return Json(spots);
+        }
     }
 }

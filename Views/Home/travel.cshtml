@@ -4,6 +4,10 @@
 }
 
 <h1>travel</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4" id="div1">
+   
+</div>
+
 
 @section Styles {
     <style>
@@ -13,10 +17,55 @@
 
 @section Scripts {
     <script>
-        const datas = {"categoryId":0, "keyword":"abc"}
-        console.log(datas)
-        const strDatas = JSON.stringify(datas)
-        console.log(strDatas)
-        console.log(JSON.parse(strDatas))
+        const searchData = {
+            "categoryId": 0,
+            "keyword": "北投",
+            "page": 2,
+            "pageSize": 9,
+            "sortType": "desc",
+            "sortBy": "categoryId"
+        }
+        const divSpots = document.querySelector('#div1')
+
+        //載入景點資料
+        const loadSpots = async () => {
+            const api = '@Url.Content("~/api/spots")'
+            const response = await fetch(api, {
+                method:'POST',
+                body: JSON.stringify(searchData),
+                headers: {
+                    'Content-Type':'application/json'
+                }
+            })
+
+            const data = await response.json()
+            
+
+            //JSON 資料讀取及顯示
+            const spots = data.spotsResult.map(spot => {
+                const { address, spotTitle, spotDescription, spotImage, spotId } = spot
+                return(`
+                     <div class="col">
+                        <div class="card h-100">
+                            <img src="${spotImage}" class="card-img-top" alt="${spotTitle}">
+                            <div class="card-body">
+                                <h5 class="card-title">${spotTitle}</h5>
+                                <p class="card-text">${spotDescription.length <= 100 ? spotDescription : spotDescription.substring(0,100)}...</p>
+                            </div>
+                            <div class="card-footer">
+                               <small class="text-body-secondary" > ${ address } </small>
+                            </div>
+                        </div>
+                    </div>
+
+                        `)
+            })
+
+                    divSpots.innerHTML = spots.join("")
+
+
+        }
+
+        loadSpots()
     </script>
 }

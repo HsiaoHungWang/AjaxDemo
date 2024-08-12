@@ -138,10 +138,23 @@ namespace AjaxDemo.Controllers
 
 
 
+           
+            //總共有多少筆資料
+            int totalCount = spots.Count();
+            int pageSize = _searchDTO.pageSize;
+            int page = _searchDTO.page;
+            //計算總共有幾頁
+            int totalPages = (int)Math.Ceiling((decimal)totalCount / pageSize);
             //分頁
+            spots = spots.Skip((page-1) * pageSize).Take(pageSize);
 
 
-            return Json(spots);
+            //設定回傳的資料
+            SpotsPagingDTO pagingDTO = new SpotsPagingDTO();
+            pagingDTO.TotalPages = totalPages;
+            pagingDTO.SpotsResult = spots.ToList();
+
+            return Json(pagingDTO);
         }
     }
 }
